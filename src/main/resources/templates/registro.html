@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+
+	<!-- MENSAJES FLASH -->
+	<div class="alert alert-danger text-center" th:if="${usuarioRepetido != null}" th:text="${usuarioRepetido}"></div>
+	<div class="alert alert-danger text-center" th:if="${camposVacios != null}" th:text="${camposVacios}"></div>
+	<div class="alert alert-danger text-center" th:if="${identificacionRepetida != null}" th:text="${identificacionRepetida}"></div>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-4 mt-5">
+				<form th:action="@{/usuario/save}" method="POST">
+
+					<!-- CAMPO NOMBRE -->
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="text" name="nombre"
+							   placeholder="Nombre" autocomplete="off" />
+					</div>
+
+					<!-- CAMPO APELLIDO -->
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="text" name="apellido"
+							   placeholder="Apellido" autocomplete="off" />
+					</div>
+
+					<!-- CAMPO TIPO IDENTIFICACION -->
+					<div class="form-group my-2">
+						<select class="form-control text-center fst-italic" name="tipoIdentificacion">
+							<option th:value="TI_CC">Cédula de Ciudadanía</option>
+							<option th:value="TI_TI">Tarjeta Identidad</option>
+							<option th:value="TI_CE">Cédula de Extranjería</option>
+						</select>
+					</div>
+
+					<!-- CAMPO IDENTIFICACION -->
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="text" name="identificacion"
+							   placeholder="Identificación" autocomplete="off" />
+					</div>
+
+					<!-- CAMPO CORREO -->
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="email" name="correo"
+							   placeholder="Correo" autocomplete="off" />
+					</div>
+
+					<!-- CAMPO USERNAME -->
+					<div class="form-group">
+						<input class="form-control text-center fst-italic" type="text" name="username"
+							   placeholder="Usuario" autocomplete="off" />
+					</div>
+
+					<!-- CAMPO PASSWORD -->
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="password" name="password"
+							   placeholder="Contraseña" autocomplete="off" />
+					</div>
+
+					<div class="form-group">
+						<button class="btn btn-secondary form-control" type="submit">Crear Cuenta</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

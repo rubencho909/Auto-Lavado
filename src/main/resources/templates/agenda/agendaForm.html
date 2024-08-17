@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+<nav th:replace="layouts/base-layout :: nav"></nav>
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-8 mt-5"> <!-- Cambié a col-md-8 para hacer el formulario más ancho -->
+
+			<div th:if="${disponibilidadAgenda}" class="alert alert-danger" role="alert">
+				<span th:text="${disponibilidadAgenda}"></span>
+			</div>
+
+			<form th:action="@{/agenda/save-agenda}" method="POST" th:object="${agenda}">
+
+				<!-- CAMPO SERVICIO SELECCIONADO -->
+				<div class="form-group">
+					<label for="servicio">Servicio Seleccionado:</label>
+					<input type="text" class="form-control" id="servicio"
+						   th:value="${servicio.titulo}" readonly>
+				</div>
+
+				<!-- CAMPO TIPO SERVICIO -->
+				<div class="form-group my-2">
+					<label>Tipos de Servicios:</label>
+					<table class="table">
+						<thead>
+						<tr>
+							<th>Descripción</th>
+							<th>Valor</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="tipoServicio : ${servicio.tipoServicios}">
+							<input type="hidden" name="tipoServicioId" th:value="${tipoServicio.id}" />
+							<td th:text="${tipoServicio.descripcion}"></td>
+							<td th:text="${tipoServicio.valor}"></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="row">
+					<!-- PRIMERA FILA: FECHA AGENDA Y LAVADOR -->
+					<div class="col-md-6"> <!-- Ajustado a col-md-6 para que cada campo ocupe la mitad del ancho -->
+						<!-- CAMPO FECHA AGENDA -->
+						<div class="form-group my-2">
+							<label>Fecha Agenda</label>
+							<input class="form-control" type="date" th:field="*{fechaAgenda}" />
+						</div>
+					</div>
+					<div class="col-md-6"> <!-- Ajustado a col-md-6 -->
+						<!-- CAMPO LAVADOR -->
+						<div class="form-group my-2">
+							<label>Lavador</label>
+							<select class="form-control" th:field="*{usuarioServicio.id}">
+								<option th:each="lavador : ${lavadores}" th:value="${lavador.id}" th:text="${lavador.nombre}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<!-- SEGUNDA FILA: TIPO DE VEHÍCULO Y PLACA -->
+				<div class="row">
+					<div class="col-md-6"> <!-- Ajustado a col-md-6 -->
+						<!-- CAMPO TIPO VEHÍCULO -->
+						<div class="form-group my-2">
+							<label for="tipoVehiculo">Tipo de Vehículo</label>
+							<select class="form-control" id="tipoVehiculo" name="vehiculo.tipoVehiculo" th:field="*{vehiculo.tipoVehiculo}">
+								<option value="Motocicleta">Motocicleta</option>
+								<option value="Vehiculo">Vehículo</option>
+								<option value="SUV">SUV</option>
+								<option value="Camioneta">Camioneta</option>
+								<option value="Camion">Camión</option>
+								<option value="TractoCamion">Tracto-Camión</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6"> <!-- Ajustado a col-md-6 -->
+						<!-- CAMPO PLACA VEHÍCULO -->
+						<div class="form-group my-2">
+							<label for="placaVehiculo">Placa del Vehículo</label>
+							<input type="text" class="form-control" id="placaVehiculo" th:field="*{vehiculo.placaVehiculo}" required />
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<button class="btn btn-secondary form-control" type="submit">Registrar Agenda</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

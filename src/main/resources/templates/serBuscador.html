@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+
+<body>
+
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-6">
+				<h2 th:if="${serNoEncontrado != null}" th:text="${serNoEncontrado}"></h2>
+
+				<div class="row justify-content-start" th:if="${ser != null}">
+					<div class="col-5">
+						<img th:src="@{'/uploads/' + ${ser.portada}}" th:alt="${ser.portada}" style="width:200px"/>
+					</div>
+					<div class="col-7">
+						<h5 th:if="${ser != null}" th:text="${ser.titulo}"></h5>
+						<div>
+							Descripción:
+							<span th:each="tipo : ${ser.tipoServicios}">
+								<span th:text="${tipo.descripcion}"></span>
+								<span th:text="${tipo.valor}"></span>
+							</span>
+						</div>
+						<div class="my-4"></div>
+						<a class="btn btn-success" th:href="@{'/servicios/cargar-ser-para-comentar/' + ${ser.id}}">
+							Comentar
+						</a>
+						<div class="my-2"></div>
+						<a class="btn btn-success" th:href="@{'/servicios/ver-comentarios/' + ${ser.id}}">
+							Ver Comentarios
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+
+	<!-- MENSAJE FLASH -->
+	<div class="alert alert-success text-center" th:if="${tipoGuardado}" th:text="${tipoGuardado}"></div>
+	<div class="alert alert-success text-center" th:if="${comentarioGuardado != null}" th:text="${comentarioGuardado}"></div>
+	<div class="alert alert-success text-center" th:if="${comentarioModificado != null}" th:text="${comentarioModificado}"></div>
+	<div class="alert alert-success text-center" th:if="${comentarioEliminado != null}" th:text="${comentarioEliminado}"></div>
+
+	<div th:if="${saveAgenda}" class="alert alert-success text-center" role="alert">
+		<p th:text="${saveAgenda}"></p>
+		<a th:href="@{/agenda/download-ticket/{fileName}(fileName=${ticketFileName})}" target="_blank">Ver y descargar ticket</a>
+	</div>
+
+	<!-- BUSCADOR -->
+	<!--
+	<div th:replace="layouts/searchForm :: search-form"></div>
+	-->
+
+	<div class="film-container">
+		<div class="galery-item" th:each="item : ${servicios}">
+			<div class="card">
+				<a th:href="@{/servicios/ver-comentarios/} + ${item.id}">
+					<img class="card-img-top" th:src="@{'/uploads/'+${item.portada}}" alt="Image">
+				</a>
+				<div class="card-body">
+					<h5 class="card-title" th:text="${item.titulo}"></h5>
+					<p class="card-text" th:each="i : ${item.tipoServicios}">
+						<span th:text="${i.descripcion}"></span>
+					</p>
+					<!-- Botón de agendamiento -->
+					<div sec:authorize="isAuthenticated()" class="text-center">
+						<a class="btn btn-primary" th:href="@{/agenda/agenda-form/} + ${item.id}">Agendar</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-4">
+				<form th:action="@{/admin/editar-usuario}" th:object="${usuario}"
+					  method="POST" >
+					<input type="hidden" th:field="*{id}" />
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="text" th:field="*{nombre}" placeholder="Nombres" />
+					</div>
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="text" th:field="*{apellido}" placeholder="Apellidos" />
+					</div>
+
+					<div class="form-group my-2">
+						<select class="form-control text-center fst-italic" th:field="*{tipoIdentificacion}" name="tipoIdentificacion">
+							<option th:value="TI_CC">Cédula de Ciudadanía</option>
+							<option th:value="TI_TI">Tarjeta Identidad</option>
+							<option th:value="TI_CE">Cédula de Extranjería</option>
+						</select>
+					</div>
+
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="text" th:field="*{identificacion}" placeholder="Identificación" />
+					</div>
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="email" th:field="*{correo}" placeholder="Correo" />
+					</div>
+
+					<div class="form-group my-2">
+						<label>Roles:</label>
+						<div th:each="rol : ${roles}">
+							<input type="checkbox" th:field="*{roles}" th:value="${rol.id}"
+								   th:checked="${usuario.roles.contains(rol)}" />
+							<span th:text="${rol.rolNombre}"></span>
+						</div>
+					</div>
+
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="text" th:field="*{username}" placeholder="Username" />
+					</div>
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic" type="password" th:field="*{password}" placeholder="Password" />
+					</div>
+					<div class="form-group my-2">
+						<button class="btn btn-secondary form-control" type="submit">Editar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

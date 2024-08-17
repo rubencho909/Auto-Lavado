@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-10">
+
+				<!-- MENSAJES FLASH -->
+				<div class="alert alert-success text-center" th:if="${movGuardado}" th:text="${movGuardado}"></div>
+				<div class="alert alert-success text-center" th:if="${movEliminado}" th:text="${movEliminado}"></div>
+
+				<table class="table table-hover table-stripped text-center">
+					<thead>
+						<tr>
+							<th>Concepto</th>
+							<th>Valor</th>
+							<th>Usuario Crea</th>
+							<th>Fecha Registro</th>
+							<th>Eliminar</th>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="mov : ${movimientos}">
+							<td>
+								<div th:each="con : ${mov.tipoConcepto}">
+									<small th:text="${con.nombre}"></small>
+								</div>
+							</td>
+
+							<td th:text="${mov.valor}"></td>
+
+							<td th:text="${mov.usuario.nombre + ' ' + mov.usuario.apellido}"></td>
+
+							<td th:text="${mov.fechaCreacion}"></td>
+
+							<td>
+								<a class="btn btn-danger" th:href="@{/movimiento/eliminar-movimiento/} + ${mov.id}">
+									<i class="fas fa-trash"></i>
+								</a>
+							</td>
+
+							<td>
+								<a class="btn btn-warning" th:href="@{/movimiento/editar-form/} + ${mov.id}">
+									<i class="fas fa-pencil-alt"></i>
+								</a>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+				<div class="form-group text-center">
+					<a class="btn btn-secondary" th:href="@{/movimiento/movimiento-form}">Registrar Movimiento</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

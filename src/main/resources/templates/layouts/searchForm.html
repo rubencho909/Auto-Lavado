@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<div th:fragment="search-form">
+
+		<div class="container my-5" >
+			<div class="row justify-content-start">
+				<form th:action="@{/buscar}" th:object="${servicio}" method="GET">
+					<div class="row mb-5">
+						<div class="col-6">
+							<input class="form-control" type="text" th:field="*{titulo}" autocomplete="off" />
+						</div>
+						<div class="col-auto">
+							<button class="btn btn-secondary" type="submit">Buscar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

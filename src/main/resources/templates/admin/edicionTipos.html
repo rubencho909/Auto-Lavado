@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-5 mt-3">
+				<h1 class="text-center" th:text="${serEncontrado.titulo}"></h1>
+				<div>
+					<table class="table mt-2">
+						<thead>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each=" i : ${serEncontrado.tipoServicios}">
+								<td th:text="${i.descripcion}"></td>
+								<td>
+									<a class="btn btn-danger" th:href="@{/admin/eliminar-tipos/} + ${i.id}">
+										<i class="fas fa-trash"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-warning" th:href="@{/admin/cargar-tipo/} + ${i.id}">
+										<i class="fas fa-pencil-alt"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

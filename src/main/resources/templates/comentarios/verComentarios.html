@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+	<!-- FRAGMENT MENU DE NAVEGACION -->
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+
+	<div class="container mt-5">
+		<div class="row justify-content-star">
+			<div class="col-4">
+				<img th:src="@{'/uploads/'+${servicio.portada}}" th:alt="${servicio.portada}" style="width:100px" />
+				<h3 class="my-2" th:text="${servicio.titulo}"></h3>
+
+				<div class="my-4"></div>
+
+				<div th:each=" i : ${servicio.tipoServicios}">
+					<small th:text="${i.descripcion}"></small>
+				</div>
+
+				<div class="my-4">
+					<a class="btn btn-success" th:href="@{'/servicios/cargar-ser-para-comentar/' +${servicio.id}}">
+						Comentar
+					</a>
+				</div>
+			</div>
+			<div class="col-7">
+				<div th:each="comentario : ${servicio.comentarios}">
+					<div th:text="${comentario.texto}"></div>
+
+					<div class="mt-2"></div>
+
+					<div th:each=" i : ${comentario.usuario} ">
+						<i class="fas fa-user">&nbsp;<small th:text="${i.username}"></small></i>
+					</div>
+
+					<div th:each=" i : ${comentario.usuario}">
+						<span th:if="${i.username == username}">
+							<a th:href="@{/comentarios/editar-comentario/} + ${comentario.id}" style="text-decoration:none">
+								<button class="btn btn-success"><i class="fas fa-pencil-alt"></i></button>
+							</a>
+							<a th:href="@{/comentarios/eliminar-comentario/} + ${comentario.id}" style="text-decoration:none">
+								<button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+							</a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

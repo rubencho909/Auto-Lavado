@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+	<!-- FRAGMENT MENU DE NAVEGACION -->
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-6 text-center">
+				<form th:action="@{/comentarios/editar}" th:object="${comentario}">
+					<div class="row form">
+						<textarea class="form-control mb-2" rows="8" th:field="*{texto}"></textarea>
+						<input type="hidden" th:field="*{id}">
+						<input type="hidden" th:field="*{servicio}" />
+
+						<button class="btn btn-outline-success" type="submit"><i class="fas fa-pencil-alt"></i></button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

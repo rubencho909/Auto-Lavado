@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+
+	<nav th:replace="layouts/base-layout :: nav"></nav>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-10">
+
+				<!-- MENSAJES FLASH -->
+				<div class="alert alert-success text-center" th:if="${userEliminado != null}" th:text="${userEliminado}"></div>
+				<div class="alert alert-success text-center" th:if="${userEditado != null}" th:text="${userEditado}"></div>
+
+				<table class="table table-hover table-stripped text-center">
+					<thead>
+						<tr>
+							<th>Nombres</th>
+							<th>Apellidos</th>
+							<th>Tipo Identificación</th>
+							<th>Identificación</th>
+							<th>Usuario</th>
+							<th>Eliminar</th>
+							<th>Editar</th>
+							<th>Roles</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr th:each="user : ${usuarios}">
+						<td th:text="${user.nombre}"></td>
+						<td th:text="${user.apellido}"></td>
+						<td th:if="${user.tipoIdentificacion=='TI_CC'}">Cédula de Ciudadanía</td>
+						<td th:if="${user.tipoIdentificacion=='TI_TI'}">Tarjeta Identidad</td>
+						<td th:if="${user.tipoIdentificacion=='TI_CE'}">Cédula de Extranjería</td>
+						<td th:text="${user.identificacion}"></td>
+						<td th:text="${user.username}"></td>
+
+						<td>
+							<a class="btn btn-danger" th:href="@{/admin/eliminar-usuario/} + ${user.id}">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+
+						<td>
+							<a class="btn btn-warning" th:href="@{/admin/editarUser-form/} + ${user.id}">
+								<i class="fas fa-pencil-alt"></i>
+							</a>
+						</td>
+
+						<td>
+							<div th:each="rol : ${user.roles}">
+								<small th:text="${rol.rolNombre}"></small>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
