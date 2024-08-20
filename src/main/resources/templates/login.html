@@ -14,14 +14,26 @@
 				<div class="alert alert-danger text-center" th:if="${param.error}">Credenciales Incorrectas</div>
 
 				<form th:action="@{/signin}" method="POST">
+
+					<!-- CAMPO USERNAME -->
 					<div class="form-group">
-						<input class="form-control text-center fst-italic" type="text" name="username" placeholder="Usuario" />
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   name="username"
+							   placeholder="Usuario"
+							   required />
 					</div>
 
+					<!-- CAMPO PASSWORD -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="password" name="password" placeholder="Contraseña" />
+						<input class="form-control text-center fst-italic"
+							   type="password"
+							   name="password"
+							   placeholder="Contraseña"
+							   required />
 					</div>
 
+					<!-- BOTON LOGIN -->
 					<div class="form-group">
 						<button class="btn btn-secondary form-control" type="submit">Log in</button>
 					</div>

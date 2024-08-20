@@ -11,11 +11,21 @@
 			<div class="col-6 text-center">
 				<form th:action="@{/comentarios/editar}" th:object="${comentario}">
 					<div class="row form">
-						<textarea class="form-control mb-2" rows="8" th:field="*{texto}"></textarea>
+
+						<!-- TEXT AREA TEXTO -->
+						<textarea class="form-control mb-2" rows="8"
+								  th:field="*{texto}"
+								  required>
+						</textarea>
+
+						<!-- CAMPO OCULTO COMENTARIO ID -->
 						<input type="hidden" th:field="*{id}">
+
+						<!-- CAMPO OCULTO SERVICIO ID -->
 						<input type="hidden" th:field="*{servicio}" />
 
-						<button class="btn btn-outline-success" type="submit"><i class="fas fa-pencil-alt"></i></button>
+						<!-- BOTON EDITAR COMENTARIO -->
+						<button class="btn btn-outline-success" type="submit"><i class="fas fa-pencil-alt"></i> Editar</button>
 					</div>
 				</form>
 			</div>

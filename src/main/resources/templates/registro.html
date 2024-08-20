@@ -17,19 +17,29 @@
 
 					<!-- CAMPO NOMBRE -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="text" name="nombre"
-							   placeholder="Nombre" autocomplete="off" />
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   name="nombre"
+							   placeholder="Nombre"
+							   autocomplete="off"
+							   required />
 					</div>
 
 					<!-- CAMPO APELLIDO -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="text" name="apellido"
-							   placeholder="Apellido" autocomplete="off" />
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   name="apellido"
+							   placeholder="Apellido"
+							   autocomplete="off"
+							   required />
 					</div>
 
 					<!-- CAMPO TIPO IDENTIFICACION -->
 					<div class="form-group my-2">
-						<select class="form-control text-center fst-italic" name="tipoIdentificacion">
+						<select class="form-control text-center fst-italic"
+								name="tipoIdentificacion"
+								required>
 							<option th:value="TI_CC">Cédula de Ciudadanía</option>
 							<option th:value="TI_TI">Tarjeta Identidad</option>
 							<option th:value="TI_CE">Cédula de Extranjería</option>
@@ -38,28 +48,45 @@
 
 					<!-- CAMPO IDENTIFICACION -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="text" name="identificacion"
-							   placeholder="Identificación" autocomplete="off" />
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   name="identificacion"
+							   placeholder="Identificación"
+							   autocomplete="off"
+							   required />
 					</div>
 
 					<!-- CAMPO CORREO -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="email" name="correo"
-							   placeholder="Correo" autocomplete="off" />
+						<input class="form-control text-center fst-italic"
+							   type="email"
+							   name="correo"
+							   placeholder="Correo"
+							   autocomplete="off"
+							   required />
 					</div>
 
 					<!-- CAMPO USERNAME -->
 					<div class="form-group">
-						<input class="form-control text-center fst-italic" type="text" name="username"
-							   placeholder="Usuario" autocomplete="off" />
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   name="username"
+							   placeholder="Usuario"
+							   autocomplete="off"
+							   required />
 					</div>
 
 					<!-- CAMPO PASSWORD -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="password" name="password"
-							   placeholder="Contraseña" autocomplete="off" />
+						<input class="form-control text-center fst-italic"
+							   type="password"
+							   name="password"
+							   placeholder="Contraseña"
+							   autocomplete="off"
+							   required />
 					</div>
 
+					<!-- BOTON CREAR USUARIO -->
 					<div class="form-group">
 						<button class="btn btn-secondary form-control" type="submit">Crear Cuenta</button>
 					</div>

@@ -10,44 +10,89 @@
 			<div class="col-4">
 				<form th:action="@{/admin/editar-usuario}" th:object="${usuario}"
 					  method="POST" >
+
+					<!-- CAMPO OCULTO ID USUARIO -->
 					<input type="hidden" th:field="*{id}" />
+
+					<!-- CAMPO NOMBRE USUARIO -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="text" th:field="*{nombre}" placeholder="Nombres" />
-					</div>
-					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="text" th:field="*{apellido}" placeholder="Apellidos" />
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   th:field="*{nombre}"
+							   placeholder="Nombres"
+							   required />
 					</div>
 
+					<!-- CAMPO APELLIDO USUARIO -->
 					<div class="form-group my-2">
-						<select class="form-control text-center fst-italic" th:field="*{tipoIdentificacion}" name="tipoIdentificacion">
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   th:field="*{apellido}"
+							   placeholder="Apellidos"
+							   required />
+					</div>
+
+					<!-- CAMPO TIPO DOCUMENTO USUARIO -->
+					<div class="form-group my-2">
+						<select class="form-control text-center fst-italic"
+								th:field="*{tipoIdentificacion}"
+								name="tipoIdentificacion"
+								required >
 							<option th:value="TI_CC">Cédula de Ciudadanía</option>
 							<option th:value="TI_TI">Tarjeta Identidad</option>
 							<option th:value="TI_CE">Cédula de Extranjería</option>
 						</select>
 					</div>
 
+					<!-- CAMPO IDENTIFICACION USUARIO -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="text" th:field="*{identificacion}" placeholder="Identificación" />
-					</div>
-					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="email" th:field="*{correo}" placeholder="Correo" />
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   th:field="*{identificacion}"
+							   placeholder="Identificación"
+							   required />
 					</div>
 
+					<!-- CAMPO CORREO USUARIO -->
+					<div class="form-group my-2">
+						<input class="form-control text-center fst-italic"
+							   type="email"
+							   th:field="*{correo}"
+							   placeholder="Correo"
+							   required />
+					</div>
+
+					<!-- CAMPO ROLES USUARIO -->
 					<div class="form-group my-2">
 						<label>Roles:</label>
 						<div th:each="rol : ${roles}">
-							<input type="checkbox" th:field="*{roles}" th:value="${rol.id}"
+							<input type="checkbox"
+								   th:field="*{roles}"
+								   th:value="${rol.id}"
 								   th:checked="${usuario.roles.contains(rol)}" />
 							<span th:text="${rol.rolNombre}"></span>
 						</div>
 					</div>
 
+					<!-- CAMPO USERNAME USUARIO -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="text" th:field="*{username}" placeholder="Username" />
+						<input class="form-control text-center fst-italic"
+							   type="text"
+							   th:field="*{username}"
+							   placeholder="Username"
+							   required />
 					</div>
+
+					<!-- CAMPO PASSWORD USUARIO -->
 					<div class="form-group my-2">
-						<input class="form-control text-center fst-italic" type="password" th:field="*{password}" placeholder="Password" />
+						<input class="form-control text-center fst-italic"
+							   type="password"
+							   th:field="*{password}"
+							   placeholder="Password"
+							   required />
 					</div>
+
+					<!-- BOTON EDITAR USUARIO -->
 					<div class="form-group my-2">
 						<button class="btn btn-secondary form-control" type="submit">Editar</button>
 					</div>

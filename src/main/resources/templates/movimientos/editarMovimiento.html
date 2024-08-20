@@ -10,24 +10,44 @@
 	<div class="row justify-content-center">
 		<div class="col-4">
 			<form th:action="@{/movimiento/editar-movimiento}" th:object="${movimiento}" method="POST">
+
+				<!-- CAMPO COCULTO ID MOVIMIENTO -->
 				<input type="hidden" th:field="*{id}" />
+
+				<!-- CAMPO TIPO CONCEPTO -->
 				<div class="form-group">
 					<label>Concepto</label>
-					<select class="form-control" th:field="*{tipoConcepto}" name="tipoConcepto" id="concepto">
-						<option th:each="concepto : ${conceptos}" th:value="${concepto.id}" th:text="${concepto.nombre}"></option>
+					<select class="form-control"
+							th:field="*{tipoConcepto}"
+							name="tipoConcepto"
+							id="concepto"
+							required>
+						<option th:each="concepto : ${conceptos}"
+								th:value="${concepto.id}"
+								th:text="${concepto.nombre}">
+						</option>
 					</select>
 				</div>
 
+				<!-- CAMPO VALOR MOVIMIENTO -->
 				<div class="form-group my-2">
 					<label>Valor</label>
-					<input class="form-control" type="text" th:field="*{valor}" />
+					<input class="form-control"
+						   type="text"
+						   th:field="*{valor}"
+						   required />
 				</div>
 
+				<!-- CAMPO FECHA CREACION MOVIMIENTO -->
 				<div class="form-group my-2">
 					<label>Fecha Creación</label>
-					<input class="form-control" type="date" th:field="*{fechaCreacion}" />
+					<input class="form-control"
+						   type="date"
+						   th:field="*{fechaCreacion}"
+						   required />
 				</div>
 
+				<!-- BOTON EDITAR MOVIMIENTO -->
 				<div class="text-center">
 					<button class="btn btn-secondary" type="submit" >Editar</button>
 				</div>

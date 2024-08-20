@@ -9,24 +9,38 @@
 			<div class="col-4 mt-5">
 				<form th:action="@{/admin/editar-tipos}" th:object="${tipo}" method="POST">
 
+					<!-- CAMPO NOMBRE TIPO SERVICIO -->
 					<div class="form-group">
-						<input class="form-control text-center" type="text" th:field="*{nombre}" readonly />
+						<input class="form-control text-center"
+							   type="text"
+							   th:field="*{nombre}"
+							   readonly />
 					</div>
 
+					<!-- CAMPO TIPO DESCRIPCION -->
 					<div class="form-group my-2">
-						<input class="form-control" type="text" th:field="*{descripcion}" />
+						<input class="form-control"
+							   type="text"
+							   th:field="*{descripcion}"
+							   required />
 					</div>
 
+					<!-- CAMPO VALOR SERVICIO -->
 					<div class="form-group my-2">
-						<input class="form-control" type="text" th:field="*{valor}" />
+						<input class="form-control"
+							   type="text"
+							   th:field="*{valor}"
+							   required />
 					</div>
 
 					<input type="hidden" th:field="*{id}" />
 					<input type="hidden" th:field="*{servicio.id}" />
 
+					<!-- BOTON EDITAR TIPO -->
 					<div class="form-group">
 						<button class="btn btn-secondary form-control" type="submit">Editar</button>
 					</div>
+
 				</form>
 			</div>
 		</div>

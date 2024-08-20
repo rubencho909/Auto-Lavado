@@ -11,21 +11,34 @@
 			<div class="col-4">
 				<form th:action="@{/admin/save-servicio}" th:object="${servicio}" method="POST" enctype="multipart/form-data">
 
+					<!-- CAMPO TITULO SERVICIO -->
 					<div class="form-group my-4">
 						<label>Título</label>
-						<input class="form-control" type="text" th:field="*{titulo}" />
+						<input class="form-control"
+							   type="text"
+							   th:field="*{titulo}"
+							   required />
 					</div>
 
+					<!-- CAMPO FECHA CREACION SERVICIO -->
 					<div class="form-group my-4">
 						<label>Fecha Creación</label>
-						<input class="form-control" type="date" th:field="*{fechaCreacion}" />
+						<input class="form-control"
+							   type="date"
+							   th:field="*{fechaCreacion}"
+							   required />
 					</div>
 
+					<!-- CAMPO PARA AÑADIR IMAGEN DEL SERVICIO -->
 					<div class="form-group my-4">
 						<label>Portada</label>
-						<input class="form-control" type="file" name="file" />
+						<input class="form-control"
+							   type="file"
+							   name="file"
+							   required />
 					</div>
 
+					<!-- BOTON GUARDAR -->
 					<div class="text-center">
 						<button class="btn btn-secondary" type="submit" >Guardar</button>
 					</div>

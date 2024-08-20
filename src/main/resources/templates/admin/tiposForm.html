@@ -11,23 +11,43 @@
 			<div class="col-6">
 
 				<form th:action="@{/tipos/save}" th:object="${tipo}" method="POST">
+
+					<!-- CAMPO SELECT TIPO SERVICIO -->
 					<select class="form-select" th:field="*{servicio}">
-						<option th:value="${ser.id}" th:text="${ser.titulo}"></option>
+						<option th:value="${ser.id}"
+								th:text="${ser.titulo}">
+						</option>
 					</select>
 
+					<!-- CAMPO NOMBRE TIPO SERVICIO -->
 					<h4 class="text-center mt-4">Tipos Servicios</h4>
 					<div class="form-group my-2">
-						<input class="form-control" type="text" placeholder="Nombre" th:field="*{nombre}" />
+						<input class="form-control"
+							   type="text"
+							   placeholder="Nombre"
+							   th:field="*{nombre}"
+							   required />
 					</div>
 
+					<!-- CAMPO DESCRIPCION SERVICIO -->
 					<div class="form-group my-2">
-						<input class="form-control" type="text" placeholder="Descripción" th:field="*{descripcion}" />
+						<input class="form-control"
+							   type="text"
+							   placeholder="Descripción"
+							   th:field="*{descripcion}"
+							   required />
 					</div>
 
+					<!-- CAMPO VALOR SERVICIO -->
 					<div class="form-group my-2">
-						<input class="form-control" type="number" placeholder="Valor" th:field="*{valor}" />
+						<input class="form-control"
+							   type="number"
+							   placeholder="Valor"
+							   th:field="*{valor}"
+							   required />
 					</div>
 
+					<!-- BOTON GUARDAR -->
 					<div class="form-group my-2">
 						<button class="form-control btn btn-secondary" type="submit">Guardar</button>
 					</div>

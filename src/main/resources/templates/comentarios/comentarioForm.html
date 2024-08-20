@@ -10,9 +10,22 @@
 			<div class="col-6 text-center">
 				<div class="row form">
 					<form th:action="@{/servicios/save-comentario}" th:object="${comentario}" method="POST">
+
+						<!-- CAMPO TITULO SERVICIO -->
 						<h2 th:text="${comentario.servicio.titulo}"></h2>
-						<textarea class="form-control mb-2" rows="8" th:field="*{texto}"></textarea>
-						<input type="hidden" th:value="${comentario.servicio.id}" />
+
+						<!-- TEXT AREA TEXTO -->
+						<textarea class="form-control mb-2"
+								  rows="8"
+								  th:field="*{texto}"
+								  required >
+						</textarea>
+
+						<!-- CAMPO OCULTO SERVICIO ID -->
+						<input type="hidden"
+							   th:value="${comentario.servicio.id}" />
+
+						<!-- BOTON ENVIAR COMENTARIO -->
 						<button class="btn btn-outline-success" type="submit">Enviar</button>
 					</form>
 				</div>
