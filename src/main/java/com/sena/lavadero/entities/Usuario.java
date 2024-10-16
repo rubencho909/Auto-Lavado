@@ -1,10 +1,13 @@
 package com.sena.lavadero.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+@Builder
 
 @Entity
 @Table(name = "usuarios")

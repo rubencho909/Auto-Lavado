@@ -43,6 +43,10 @@ public class UsuarioService {
         return usuarioRepository.existsByIdentificacion(identificacion);
     }
 
+    public boolean existsByCorreo(String correo) {
+        return usuarioRepository.existsByCorreo(correo);
+    }
+
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
     }

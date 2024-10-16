@@ -55,6 +55,11 @@ public class UsuarioController {
             model.addAttribute("identificacionRepetida", "Número de Identificación ya se encuentra registrado!");
             return "registro";
         }
+        System.out.println("**** Correo: **** " + correo);
+        if(usuarioService.existsByCorreo(correo)) {
+            model.addAttribute("correoRepetido", "Correo Electrónico ya se encuentra registrado!");
+            return "registro";
+        }
 
         if(username.isEmpty() || password.isEmpty() || nombre.isEmpty() || apellido.isEmpty() ||
                 tipoIdentificacion.isEmpty() || identificacion.isEmpty() || correo.isEmpty()) {

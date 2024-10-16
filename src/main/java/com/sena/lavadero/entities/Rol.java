@@ -24,6 +24,10 @@ public class Rol {
         this.rolNombre = rolNombre;
     }
 
+    public Rol(RolNombre rolNombre) {
+        this.rolNombre = rolNombre;
+    }
+
     public int getId() {
         return id;
     }
