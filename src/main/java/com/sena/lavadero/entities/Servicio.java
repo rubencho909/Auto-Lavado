@@ -14,6 +14,8 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+
+    @Column(name = "portada")
     private String portada;
 
     @Column(name = "fecha_creacion")

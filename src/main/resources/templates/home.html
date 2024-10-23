@@ -24,7 +24,7 @@
 		<div class="galery-item" th:each="item : ${servicios}">
 			<div class="card">
 				<a th:href="@{/servicios/ver-comentarios/} + ${item.id}">
-					<img class="card-img-top" th:src="@{'/uploads/'+${item.portada}}" alt="Image">
+					<img class="card-img-top" th:src="${item.portada}" alt="Image">
 				</a>
 				<div class="card-body">
 					<h5 class="card-title" th:text="${item.titulo}"></h5>

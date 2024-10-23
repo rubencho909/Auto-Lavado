@@ -5,10 +5,8 @@ import com.sena.lavadero.entities.Servicio;
 import com.sena.lavadero.entities.TipoServicio;
 import com.sena.lavadero.entities.Usuario;
 import com.sena.lavadero.enums.RolNombre;
-import com.sena.lavadero.service.IServiciosService;
-import com.sena.lavadero.service.ITipoServiciosService;
-import com.sena.lavadero.service.RolService;
-import com.sena.lavadero.service.UsuarioService;
+import com.sena.lavadero.service.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,6 +25,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -44,6 +44,8 @@ public class AdminController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    private final IFileUploadService iFileUploadService;
+
     @GetMapping("/servicio-form")
     public String servicioForm(Model model) {
         model.addAttribute("servicio", new Servicio());
@@ -52,24 +54,36 @@ public class AdminController {
 
     @PostMapping("/save-servicio")
     public String guardarServicio(@RequestParam(name="file")MultipartFile portada, Servicio servicio,
-                                  RedirectAttributes redirect) {
+                                  RedirectAttributes redirect) throws IOException {
 
         if(!portada.isEmpty()) {
-            String ruta = "D://ESTUDIOS REALIZADOS//TECNOLOGIA ANALISIS SOFTWARE//uploads";
-            String nombreUnico = UUID.randomUUID() + " " + portada.getOriginalFilename();
+
+            // Subir imagen a Carpeta Local
+            //String ruta = "D://ESTUDIOS REALIZADOS//TECNOLOGIA ANALISIS SOFTWARE//uploads";
+            //String nombreUnico = UUID.randomUUID() + " " + portada.getOriginalFilename();
 
             try {
+                /*
                 byte[] bytes = portada.getBytes();
                 Path rutaAbsoluta = Paths.get(ruta + "//" + nombreUnico);
                 Files.write(rutaAbsoluta, bytes);
                 servicio.setPortada(nombreUnico);
+                */
+
+                // Subir imagen a Cloudinary
+                //String nombreUnico = UUID.randomUUID() + "_" + portada.getOriginalFilename();
+                String imageUrl = iFileUploadService.uploadFile(portada);
+
+                // Guardar la URL pública de Cloudinary en la entidad Servicio
+                servicio.setPortada(imageUrl);
 
                 iServiciosService.save(servicio);
                 redirect.addFlashAttribute( "serGuardado", "Servicio Guardado Exitosamente!");
                 redirect.addFlashAttribute("serParaTipoServicio", servicio);
 
-            } catch (Exception e) {
-                e.getCause().getMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+                redirect.addFlashAttribute("error", "Error al subir la imagen: " + e.getMessage());
             }
         }
         return "redirect:/tipos/tipos-form";
@@ -104,22 +118,23 @@ public class AdminController {
                                  Servicio ser, RedirectAttributes redirect,
                                  @ModelAttribute("servicio") Servicio servicio, Model model) {
 
-        if(!imagenPortada.isEmpty()) {
-            String ruta = "D://ESTUDIOS REALIZADOS//TECNOLOGIA ANALISIS SOFTWARE//uploads";
-            String nombreUnico = UUID.randomUUID() + " " + imagenPortada.getOriginalFilename();
+        try {
+            // Verifica si se ha subido una nueva imagen
+            if (!imagenPortada.isEmpty()) {
+                // Subir imagen a Cloudinary
+                String imageUrl = iFileUploadService.uploadFile(imagenPortada);
 
-            try {
-                byte[] bytes = imagenPortada.getBytes();
-                Path rutaAbsoluta = Paths.get(ruta + "//" + nombreUnico);
-                Files.write(rutaAbsoluta, bytes);
-                servicio.setPortada(nombreUnico);
-
-                iServiciosService.save(servicio);
-                redirect.addFlashAttribute( "serEditado", "Servicio Editado Exitosamente!");
-
-            } catch (Exception e) {
-                e.getCause().getMessage();
+                // Guardar la URL pública de Cloudinary en la entidad Servicio
+                servicio.setPortada(imageUrl);
             }
+
+            // Actualiza la información del servicio
+            iServiciosService.save(servicio);
+            redirect.addFlashAttribute("serEditado", "Servicio Editado Exitosamente!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            redirect.addFlashAttribute("error", "Error al editar el servicio: " + e.getMessage());
         }
         return "redirect:/admin/gestion-servicios";
     }
