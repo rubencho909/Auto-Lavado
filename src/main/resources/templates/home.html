@@ -20,7 +20,6 @@
 	<div th:replace="layouts/searchForm :: search-form"></div>
 	-->
 
-	<!--
 	<div class="film-container">
 		<div class="galery-item" th:each="item : ${servicios}">
 			<div class="card">
@@ -36,48 +35,6 @@
 					<div sec:authorize="isAuthenticated()" class="text-center">
 						<a class="btn btn-primary" th:href="@{/agenda/agenda-form/} + ${item.id}">Agendar</a>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
-
-	<div class="film-container">
-		<!-- Card 1 -->
-		<div class="card">
-			<img class="card-img-top" src="/images/1.jpg" alt="Image 1">
-			<div class="card-body">
-				<h5 class="card-title">Título 1</h5>
-				<p class="card-text">Descripción del servicio 1.</p>
-				<!-- Botón de agendamiento -->
-				<div class="text-center">
-					<a class="btn btn-primary" href="#">Agendar</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Card 2 -->
-		<div class="card">
-			<img class="card-img-top" src="/images/2.jpg" alt="Image 2">
-			<div class="card-body">
-				<h5 class="card-title">Título 2</h5>
-				<p class="card-text">Descripción del servicio 2.</p>
-				<!-- Botón de agendamiento -->
-				<div class="text-center">
-					<a class="btn btn-primary" href="#">Agendar</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Card 3 -->
-		<div class="card">
-			<img class="card-img-top" src="/images/3.jpg" alt="Image 3">
-			<div class="card-body">
-				<h5 class="card-title">Título 3</h5>
-				<p class="card-text">Descripción del servicio 3.</p>
-				<!-- Botón de agendamiento -->
-				<div class="text-center">
-					<a class="btn btn-primary" href="#">Agendar</a>
 				</div>
 			</div>
 		</div>
